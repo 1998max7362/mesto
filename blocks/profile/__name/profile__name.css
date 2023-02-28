@@ -1,0 +1,17 @@
+/* .profile__name{
+    margin: 0;
+    font-size: clamp(27px,3.3vw,42px);
+    line-height: clamp(33px,3.7vw,48px);
+    font-weight: 500;
+    position: relative;
+} */
+
+.profile__name{
+    margin: 0;
+    font-size: clamp(27px,3.3vw,42px);
+    line-height: clamp(33px,3.7vw,48px);
+    font-weight: 500;
+    /* grid-area: name; */
+    /* float: left; */
+    position: relative;
+}

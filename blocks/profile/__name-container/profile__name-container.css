@@ -1,0 +1,5 @@
+.profile__name-container{
+    grid-area: name;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+}

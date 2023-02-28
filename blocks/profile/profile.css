@@ -1,0 +1,20 @@
+/* .profile{
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 460px){
+    .profile{
+        flex-direction: column;
+    }
+} */
+
+.profile{
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-areas:
+    "avatar name . addButton"
+    "avatar job . addButton";
+    color: white;
+    align-items: center;
+}

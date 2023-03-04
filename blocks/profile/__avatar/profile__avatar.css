@@ -1,18 +1,12 @@
-/* .profile__avatar{
-    border-radius: 50%;
-    height: 127.5px;
-    margin-right: 45px;
-} */
-
-/* @media screen and (max-width: 460px){
-    .profile__avatar{
-        margin-right: 0;
-    }
-} */
-
 .profile__avatar{
     border-radius: 50%;
     height: 127.5px;
     margin-right: 45px;
     grid-area: avatar;
+}
+
+@media screen and (max-width: 500px){
+    .profile__avatar{
+        margin-right: 0;
+    }
 }

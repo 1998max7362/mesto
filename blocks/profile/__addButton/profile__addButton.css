@@ -1,6 +1,5 @@
 .profile__addButton{
-    /* margin-left: max(auto,60px); */
-    margin-left: 50px;
+    margin-left: auto;
     height: 50px;
     width: 150px;
     background-image: url(../../../images/profile/addIcon.svg);
@@ -8,11 +7,13 @@
     background-repeat: no-repeat;
     border: 1px solid #FFFFFF;
     background-color: transparent;
-    grid-area: addButton;
+    grid-column: 2;
 }
 
-@media screen and (max-width: 460px){
+@media screen and (max-width: 500px){
     .profile__addButton{
+        margin-top: 36px;
         margin-left: 0;
+        width: 100%;
     }
 }

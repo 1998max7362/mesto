@@ -1,19 +1,13 @@
-/* .profile__job{
+.profile__job{
     margin: 0;
     font-size: clamp(14px, 2vw,18px);
     line-height: 22px;
     margin-top: 16px;
 }
 
-@media screen and (max-width: 460px){
+@media screen and (max-width: 500px){
     .profile__job{
         margin-top: 14px;
+        text-align: center;
     }
-} */
-
-.profile__job{
-    margin: 0;
-    font-size: clamp(14px, 2vw,18px);
-    line-height: 22px;
-    grid-area: job;
 }

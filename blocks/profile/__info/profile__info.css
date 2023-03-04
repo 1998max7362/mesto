@@ -2,8 +2,9 @@
     position: relative;
 }
 
-@media screen and (max-width: 460px){
+@media screen and (max-width: 500px){
     .profile__info{
+        margin-top: 26px;
         grid-template-columns: auto;
         text-align: center;
     }

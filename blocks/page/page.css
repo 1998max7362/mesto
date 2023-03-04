@@ -9,6 +9,6 @@
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   max-width: 880px;
-  padding-top: clamp(28px,2.5vw,32px);
+  padding-top: clamp(28px,3.6vw,45px);
 }
 

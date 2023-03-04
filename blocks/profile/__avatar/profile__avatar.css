@@ -1,8 +1,7 @@
 .profile__avatar{
     border-radius: 50%;
-    height: 127.5px;
-    margin-right: 45px;
-    grid-area: avatar;
+    height: 120px;
+    margin-right: 30px;
 }
 
 @media screen and (max-width: 500px){

@@ -42,6 +42,7 @@ function handleFormSubmit (evt) {
     // Вставьте новые значения с помощью textConten
     profileName.textContent = nameInput.value
     profileJob.textContent = nameInput.value
+    closePopup()
 }
 
 // Прикрепляем обработчик к форме:

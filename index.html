@@ -19,11 +19,11 @@
                 <div class="profile__info">
                     <div class="profile__name-container">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button type="button" class="profile__editButton" aria-label="editButton"></button>
+                        <button type="button" class="profile__edit-button" aria-label="editButton"></button>
                     </div>
                     <p class="profile__job">Исследователь океана</p>        
                 </div>
-                <button type="button" class="profile__addButton" aria-label="addButton" value="0"></button>
+                <button type="button" class="profile__add-button" aria-label="addButton" value="0"></button>
             </section>
 
             <section class="elements">
@@ -32,7 +32,7 @@
                     <img class="element__img" src="./images/elements/Karachaevsk.jpg" alt="Карачаевск">
                     <div class="element__info">
                         <h2 class="element__name">Карачаевск</h2>
-                        <input class="element__like-button" aria-label="likeButton" type="button" value="0">
+                        <input class="element__like-button" aria-label="likeButton" type="button" value="">
                     </div>  
                 </div>
 
@@ -40,54 +40,57 @@
                     <img class="element__img" src="./images/elements/Elbrus.jpg" alt="Эльбрус">
                     <div class="element__info">
                         <h2 class="element__name">Гора Эльбрус</h2>
-                        <input class="element__like-button" aria-label="likeButton" type="button" value="0">
+                        <input class="element__like-button" aria-label="likeButton" type="button" value="">
                     </div>  
                 </div>
                 <div class="element">
                     <img class="element__img" src="./images/elements/Dombai.jpg" alt="Домбай">
                     <div class="element__info">
                         <h2 class="element__name">Домбай</h2>
-                        <input class="element__like-button" aria-label="likeButton" type="button" value="0">
+                        <input class="element__like-button" aria-label="likeButton" type="button" value="">
                     </div>  
                 </div>
                 <div class="element">
                     <img class="element__img" src="./images/elements/Elbrus.jpg" alt="Эльбрус">
                     <div class="element__info">
                         <h2 class="element__name">Гора Эльбрус</h2>
-                        <input class="element__like-button" aria-label="likeButton" type="button" value="0">
+                        <input class="element__like-button" aria-label="likeButton" type="button" value="">
                     </div>  
                 </div>
                 <div class="element">
                     <img class="element__img" src="./images/elements/Dombai.jpg" alt="Домбай">
                     <div class="element__info">
                         <h2 class="element__name">Домбай</h2>
-                        <input class="element__like-button" aria-label="likeButton" type="button" value="0">
+                        <input class="element__like-button" aria-label="likeButton" type="button" value="">
                     </div>  
                 </div>
                 <div class="element">
                     <img class="element__img" src="./images/elements/Karachaevsk.jpg" alt="Карачаевск">
                     <div class="element__info">
                         <h2 class="element__name">Карачаево-Черкесия</h2>
-                        <input class="element__like-button" aria-label="likeButton" type="button" value="0">
+                        <input class="element__like-button" aria-label="likeButton" type="button" value="">
                     </div>  
                 </div>
             </section>
-
-            <footer class="footer">
-                <p class="footer__copyright" >&copy; 2023 Mesto Russia</p>
-            </footer>
         </main>
 
+        <footer class="footer">
+            <p class="footer__copyright" >&copy; 2023 Mesto Russia</p>
+        </footer>
+
         <div class="popup">
-            <form class="popup__container">
+            <div class="popup__container">
                 <button type="button" class="popup__close-button" aria-label="Close"></button>
-                <h2 class="popup__name">Редактировать профиль</h2>
-                <input class="popup__input" id="Name" type="text" name="Name" aria-label="Name">
-                <input class="popup__input" id="Job" type="text" name="Job" aria-label="Job">
-                <button type="submit" class="popup__save-button" aria-label="Save">Сохранить</button>
-            </form>
+                <form class="popup__name-form" name="name&job-form">
+                    <h2 class="popup__name">Редактировать профиль</h2>
+                    <input class="popup__input popup__input_el_name" placeholder="Name" id="Name" type="text" name="Name" aria-label="Name">
+                    <input class="popup__input popup__input_el_job" placeholder="Job" id="Job" type="text" name="Job" aria-label="Job">
+                    <button type="submit" class="popup__save-button" aria-label="Save">Сохранить</button>
+                </form>
+            </div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

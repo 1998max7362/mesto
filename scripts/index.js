@@ -2,16 +2,16 @@
 const popup = document.querySelector('.popup');
 const formElement = document.querySelector('.popup__container');
 // Находим поля формы в DOM
-const nameInput = formElement.querySelector('#Name');
-const jobInput = formElement.querySelector('#Job');
+const nameInput = formElement.querySelector('.popup__input_el_name');
+const jobInput = formElement.querySelector('.popup__input_el_job');
 const closeButton = formElement.querySelector('.popup__close-button');
 const saveButton = formElement.querySelector('.popup__save-button');
 
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
-const editButton = document.querySelector('.profile__editButton');
-const addButton = document.querySelector('.profile__addButton');
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
 
 
 const openPopup = ()=>{

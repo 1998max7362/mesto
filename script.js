@@ -41,7 +41,7 @@ function handleFormSubmit (evt) {
     // Выберите элементы, куда должны быть вставлены значения полей
     // Вставьте новые значения с помощью textConten
     profileName.textContent = nameInput.value
-    profileJob.textContent = nameInput.value
+    profileJob.textContent = jobInput.value
     closePopup()
 }
 

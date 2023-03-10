@@ -1,6 +1,6 @@
 import {openPopup, closePopup} from "../popup.js"
 
-const namePopup = document.querySelector('.popup__name-form');
+const namePopup = document.querySelector('.popup_type_name-form');
 
 const formElement = namePopup.querySelector('.form');
 const nameInput = formElement.querySelector('.form__input_el_first');

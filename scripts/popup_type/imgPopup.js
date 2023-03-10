@@ -1,6 +1,6 @@
 import { openPopup } from "../popup.js"
 
-const imgPopup = document.querySelector('.popup__img');
+const imgPopup = document.querySelector('.popup_type_img');
 const wideImg =  imgPopup.querySelector('.img-container__img')
 const captionImg =  imgPopup.querySelector('.img-container__caption')
 

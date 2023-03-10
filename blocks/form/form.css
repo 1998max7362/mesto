@@ -1,5 +1,4 @@
 .form{
-    display: none;
     padding: 34px 36px 37px;
     width: clamp(238px,34vw,358px);
     background-color: white;

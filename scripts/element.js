@@ -1,9 +1,9 @@
-import {openWidePic} from "./popup.js";
+import {openWidePic} from "./popup/imgPopup.js";
 
 const elements = document.querySelector('.elements')
 const templateElement = document.querySelector('#element').content; 
 
-const addCard = (placeName, sourceLink)=>{
+const createCard = (placeName, sourceLink)=>{
     const card = templateElement.querySelector('.element').cloneNode(true);
     const elementImg = card.querySelector('.element__img')
     elementImg.src = sourceLink
@@ -17,7 +17,10 @@ const addCard = (placeName, sourceLink)=>{
     likeButton.addEventListener('click', ()=>likeButton.classList.toggle('element__like-button_checked'))
     removeButton.addEventListener('click', ()=>card.remove())
 
-    elements.prepend(card)
+    return card
+}
+const addCard = (placeName, sourceLink)=>{
+    elements.prepend(createCard(placeName, sourceLink))
 }
 
 export {addCard}

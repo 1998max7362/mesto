@@ -25,18 +25,5 @@ const initialCards = [
   }
 ];
 
-const profileFormAttrs = {
-  form_name: 'Редактировать профиль',
-  first_input: 'Имя',
-  second_input: 'Предназначение',
-  submit: 'Сохранить',
-}
 
-const cardFormAttrs = {
-  form_name: 'Новое место',
-  first_input: 'Название',
-  second_input: 'Ссылка на картинку',
-  submit: 'Создать',
-}
-
-export {initialCards, profileFormAttrs, cardFormAttrs}
+export {initialCards}

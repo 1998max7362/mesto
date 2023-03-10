@@ -1,4 +1,4 @@
-.popup__name{
+.form__name{
     margin: 0;
     margin-bottom: 24px;
     font-weight: 900;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 500px){
-    .popup__name{
+    .form__name{
         font-size: 18px;
         line-height: 22px;
         margin-bottom: 45px;

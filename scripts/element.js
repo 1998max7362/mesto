@@ -1,4 +1,4 @@
-import {openWidePic} from "./popup/imgPopup.js";
+import {openWidePic} from "./popup_type/imgPopup.js";
 
 const elements = document.querySelector('.elements')
 const templateElement = document.querySelector('#element').content; 

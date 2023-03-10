@@ -1,5 +1,5 @@
-import {openNameFormPopup} from "./popup/profilePopup.js"
-import {openCardFormPopup} from "./popup/cardPopup.js"
+import {openNameFormPopup} from "./popup_type/profilePopup.js"
+import {openCardFormPopup} from "./popup_type/cardPopup.js"
 
 import {initialCards} from "./initials.js";
 import { addCard } from "./element.js";

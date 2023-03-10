@@ -13,11 +13,14 @@ https://1998max7362.github.io/mesto/
 
 **Figma**
 
-[Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+[Ссылка на макет в Figma](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
 
 **Используемые технологии**
  
 1) Адаптивная версктка
 2) Немного (уже побольше) JS
+3) Работа с DOM
+4) Шаблоны блоков
+5) PerfectPixel
 
 

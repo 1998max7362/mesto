@@ -11,8 +11,6 @@ const openCardFormPopup = () => {
   openPopup(cardPopup)
 
   formElement.reset()
-
-  formElement.addEventListener('submit', handleCardFormSubmit, { once: true });
 }
 
 const handleCardFormSubmit = (evt) =>{
@@ -20,4 +18,7 @@ const handleCardFormSubmit = (evt) =>{
   addCard(nameInput.value, sourceInput.value)
   closePopup(cardPopup)
 }
+
+formElement.addEventListener('submit', handleCardFormSubmit);
+
 export { openCardFormPopup }

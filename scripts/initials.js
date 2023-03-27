@@ -25,5 +25,14 @@ const initialCards = [
   }
 ];
 
+const componentSelectors = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__save-button',
+  inactiveButtonClass: 'form__save-button_disabled',
+  inputErrorClass: 'form__input_novalid',
+  // errorClass: 'popup__error_visible'
+}
 
-export {initialCards}
+
+export {initialCards, componentSelectors}

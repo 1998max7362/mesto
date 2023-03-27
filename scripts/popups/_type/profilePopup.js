@@ -9,14 +9,8 @@ const jobInput = formElement.querySelector('.form__input_el_second');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
-const openNameFormPopup = () => {
-  openPopup(namePopup)
-
-  nameInput.value = profileName.textContent
-  jobInput.value = profileJob.textContent
-
-  formElement.addEventListener('submit', handleNameFormSubmit, { once: true });
-}
+nameInput.value = profileName.textContent
+jobInput.value = profileJob.textContent
 
 const handleNameFormSubmit = (evt) =>{
   evt.preventDefault(); 
@@ -24,5 +18,13 @@ const handleNameFormSubmit = (evt) =>{
   profileJob.textContent = jobInput.value
   closePopup(namePopup)
 }
+
+const openNameFormPopup = () => {
+  openPopup(namePopup)
+  nameInput.value = profileName.textContent
+  jobInput.value = profileJob.textContent
+}
+
+formElement.addEventListener('submit', handleNameFormSubmit);
 
 export {openNameFormPopup}

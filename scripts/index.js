@@ -1,8 +1,9 @@
 import {openNameFormPopup} from "./popups/_type/profilePopup.js"
 import {openCardFormPopup} from "./popups/_type/cardPopup.js"
 import {closePopup} from "./popups/popup.js"
+import {enableValidation} from "./validation/validate.js"
 
-import {initialCards} from "./initials.js";
+import {initialCards, componentSelectors} from "./initials.js";
 import { addCard } from "./element.js";
 
 
@@ -20,13 +21,12 @@ popups.forEach((popup)=>{
   popup.addEventListener('click', evt => (evt.target === popup || evt.target === closeButton)? closePopup(popup): false)
 })
 
-
-
-
-
+// Добавляем карточки при загрузке страницы
 initialCards.forEach((card)=>{
   addCard(card.name, card.link)
 })
 
+// Включаем валидацию
+enableValidation(componentSelectors)
 
 

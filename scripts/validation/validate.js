@@ -1,26 +1,24 @@
 // Всё спер из Спринт 7/11: 6 спринт → Тема 5/9: Валидация форм → Урок 5/7
 
-const showInputError = (formElement, inputElement, errorMessage, componentSelectors) => {
+const showInputError = (formElement, inputElement, errorMessage, inputErrorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-input-error`);
-  inputElement.classList.add(componentSelectors.inputErrorClass);
+  inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   // errorElement.classList.add('form__input-error_active'); Не имеет смысла, так как если нет ошибки, то span пустой и его высота равна 0
 };
 
-const hideInputError = (formElement, inputElement, componentSelectors) => {
+const hideInputError = (formElement, inputElement, inputErrorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-input-error`);
-  inputElement.classList.remove(componentSelectors.inputErrorClass);
+  inputElement.classList.remove(inputErrorClass);
   // errorElement.classList.remove('form__input-error_active'); Не имеет смысла, так как если нет ошибки, то span пустой и его высота равна 0
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement, componentSelectors) => {
+const checkInputValidity = (formElement, inputElement, inputErrorClass) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, componentSelectors);
-    // formElement.addEventListener('submit', handleNameFormSubmit);
+    showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass);
   } else {
-    hideInputError(formElement, inputElement, componentSelectors);
-    // formElement.removeEventListener('submit', handleNameFormSubmit);
+    hideInputError(formElement, inputElement, inputErrorClass);
   }
 };
 
@@ -30,12 +28,12 @@ const hasInvalidInput = (inputList) =>{
   }); 
 }
 
-const toggleButtonState = (inputList, buttonElement,componentSelectors) => {
+const toggleButtonState = (inputList, buttonElement,inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(componentSelectors.inactiveButtonClass);
+    buttonElement.classList.add(inactiveButtonClass);
     buttonElement.disabled = true
   } else {
-    buttonElement.classList.remove(componentSelectors.inactiveButtonClass);
+    buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.disabled = false
   }
 }
@@ -43,12 +41,12 @@ const toggleButtonState = (inputList, buttonElement,componentSelectors) => {
 const setEventListeners = (formElement, componentSelectors) => {
   const inputList = Array.from(formElement.querySelectorAll(componentSelectors.inputSelector));
   const buttonElement = formElement.querySelector(componentSelectors.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement,componentSelectors);
+  toggleButtonState(inputList, buttonElement,componentSelectors.inactiveButtonClass);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement, componentSelectors);
-      toggleButtonState(inputList, buttonElement,componentSelectors);
+      checkInputValidity(formElement, inputElement, componentSelectors.inputErrorClass);
+      toggleButtonState(inputList, buttonElement, componentSelectors.inactiveButtonClass);
     });
   });
 }

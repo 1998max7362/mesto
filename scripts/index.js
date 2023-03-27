@@ -13,10 +13,14 @@ const addButton = document.querySelector('.profile__add-button');
 editButton.addEventListener('click', openNameFormPopup)
 addButton.addEventListener('click', openCardFormPopup)
 
+// Назначаем закрытие попапа при нажатии на кнопку или фон
 const popups = document.querySelectorAll('.popup')
 popups.forEach((popup)=>{
-  popup.querySelector('.popup__close-button').addEventListener('click', ()=>closePopup(popup))
+  const closeButton = popup.querySelector('.popup__close-button')
+  popup.addEventListener('click', evt => (evt.target === popup || evt.target === closeButton)? closePopup(popup): false)
 })
+
+
 
 
 

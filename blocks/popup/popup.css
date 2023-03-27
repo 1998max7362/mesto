@@ -12,4 +12,6 @@
   transition-property: opacity, visibility;
   transition-duration: .3s, 0s;
   transition-delay: 0s, .3s;
+
+  cursor: pointer;
 }

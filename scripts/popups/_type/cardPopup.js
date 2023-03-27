@@ -9,7 +9,6 @@ const sourceInput = formElement.querySelector('.form__input_el_second');
 
 const openCardFormPopup = () => {
   openPopup(cardPopup)
-
   formElement.reset()
 }
 

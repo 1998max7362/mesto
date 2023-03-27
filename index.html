@@ -45,25 +45,29 @@
             </div>
         </template>
 
-        <div class="popup popup_type_name-form">
+        <div class="popup popup_type_profile">
             <div class="popup__container">
                 <button type="button" class="popup__close-button" aria-label="Close"></button>
-                <form class="form" name="name&job-form">
+                <form class="form" name="name&job-form" novalidate>
                     <h2 class="form__name">Редактировать профиль</h2>
-                    <input class="form__input form__input_el_first" placeholder="Имя" id="profile_name" type="text" name="Имя" aria-label="Имя">
-                    <input class="form__input form__input_el_second" placeholder="Предназначение" id="Job" type="text" name="Предназначение" aria-label="Предназначение">
+                    <input class="form__input form__input_el_first" placeholder="Имя" id="profile_name" type="text" name="Имя" aria-label="Имя" required minlength="2" maxlength="40">
+                    <span class="form__input-error form__input_el_first-input-error">Ашибка</span>
+                    <input class="form__input form__input_el_second" placeholder="Предназначение" id="Job" type="text" name="Предназначение" aria-label="Предназначение" required minlength="2" maxlength="200">
+                    <span class="form__input-error form__input_el_second-input-error">Ашибка</span>
                     <button type="submit" class="form__save-button" aria-label="Сохранить">Сохранить</button>
                 </form>
             </div>
         </div>
 
-        <div class="popup popup_type_card-form">
+        <div class="popup popup_type_card">
             <div class="popup__container">
                 <button type="button" class="popup__close-button" aria-label="Close"></button>
-                <form class="form" name="name&job-form">
+                <form class="form" name="place-form">
                     <h2 class="form__name">Новое место</h2>
                     <input class="form__input form__input_el_first" placeholder="Название" id="place_name" type="text" name="Название" aria-label="Название">
+                    <span class="form__input-error form__input_el_first-input-error">,sndmfка</span>
                     <input class="form__input form__input_el_second" placeholder="Ссылка на картинку" id="source_link" type="url" name="Ссылка на картинку" aria-label="Ссылка на картинку">
+                    <span class="form__input-error form__input_el_second-input-error">dfhjgа</span>
                     <button type="submit" class="form__save-button" aria-label="Создать">Создать</button>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 import {openPopup, closePopup } from "../popup.js"
-import { addCard } from "../element.js";
+import { addCard } from "../../element.js";
 
-const cardPopup = document.querySelector('.popup_type_card-form');
+const cardPopup = document.querySelector('.popup_type_card');
 
 const formElement = cardPopup.querySelector('.form');
 const nameInput = formElement.querySelector('.form__input_el_first');

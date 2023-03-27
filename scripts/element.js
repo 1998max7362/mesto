@@ -1,4 +1,4 @@
-import {openWidePic} from "./popup_type/imgPopup.js";
+import {openWidePic} from "./popups/_type/imgPopup.js";
 
 const elements = document.querySelector('.elements')
 const templateElement = document.querySelector('#element').content; 
@@ -19,6 +19,7 @@ const createCard = (placeName, sourceLink)=>{
 
     return card
 }
+
 const addCard = (placeName, sourceLink)=>{
     elements.prepend(createCard(placeName, sourceLink))
 }

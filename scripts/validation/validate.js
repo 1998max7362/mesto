@@ -1,4 +1,4 @@
-// Всё спер из Спринт 7/11: 6 спринт → Тема 5/9: Валидация форм → Урок 5/7
+// Почти всё спер из Спринт 7/11: 6 спринт → Тема 5/9: Валидация форм → Урок 5/7
 
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-input-error`);
@@ -28,19 +28,28 @@ const hasInvalidInput = (inputList) =>{
   }); 
 }
 
+const disableButton = (buttonElement,inactiveButtonClass) =>{
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.disabled = true
+}
+
+const enableButton = (buttonElement,inactiveButtonClass) =>{
+  buttonElement.classList.remove(inactiveButtonClass);
+  buttonElement.disabled = false
+}
+
 const toggleButtonState = (inputList, buttonElement,inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.disabled = true
+    disableButton(buttonElement,inactiveButtonClass)
   } else {
-    buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.disabled = false
+    enableButton(buttonElement,inactiveButtonClass)
   }
 }
 
 const setEventListeners = (formElement, componentSelectors) => {
   const inputList = Array.from(formElement.querySelectorAll(componentSelectors.inputSelector));
   const buttonElement = formElement.querySelector(componentSelectors.submitButtonSelector);
+  
   toggleButtonState(inputList, buttonElement,componentSelectors.inactiveButtonClass);
 
   inputList.forEach((inputElement) => {
@@ -61,4 +70,4 @@ const enableValidation = (componentSelectors) => {
   })
 }
 
-export { enableValidation }
+export { enableValidation, enableButton, disableButton, hideInputError }

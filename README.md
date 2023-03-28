@@ -22,5 +22,6 @@ https://1998max7362.github.io/mesto/
 3) Работа с DOM
 4) Шаблоны блоков
 5) PerfectPixel
+6) Валидация форм
 
 

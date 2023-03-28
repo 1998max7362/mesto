@@ -10,8 +10,8 @@ const showInputError = (formElement, inputElement, errorMessage, inputErrorClass
 const hideInputError = (formElement, inputElement, inputErrorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-input-error`);
   inputElement.classList.remove(inputErrorClass);
-  // errorElement.classList.remove('form__input-error_active'); Не имеет смысла, так как если нет ошибки, то span пустой и его высота равна 0
   errorElement.textContent = '';
+  // errorElement.classList.remove('form__input-error_active'); Не имеет смысла, так как если нет ошибки, то span пустой и его высота равна 0
 };
 
 const checkInputValidity = (formElement, inputElement, inputErrorClass) => {

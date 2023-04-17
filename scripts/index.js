@@ -1,21 +1,19 @@
 import { initialCards, componentSelectors } from "./initials.js";
 import { addCard } from "./card.js";
-import { FormPopup } from "./Popup.js";
+import { ProfileFormPopup, PlaceFormPopup } from "./Popup.js";
 
 
 
 // // Добавляем карточки при загрузке страницы
 initialCards.forEach((card) => {
-
   addCard(card.name, card.link, '#element')
-  // addCard('Байкал', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg')
 })
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 
-const formPopup = new FormPopup('.popup_type_profile','popup_opened')
-editButton.addEventListener('click', () => formPopup.open())
+const profileFormPopup = new ProfileFormPopup('.popup_type_profile','popup_opened',componentSelectors, '.profile__name', '.profile__job' )
+editButton.addEventListener('click', () => profileFormPopup.open())
 
-
-
+const placeFormPopup = new PlaceFormPopup('.popup_type_card', 'popup_opened', componentSelectors, '#element')
+addButton.addEventListener('click', () => placeFormPopup.open())

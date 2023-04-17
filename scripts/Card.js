@@ -1,4 +1,6 @@
+import { ImgPopup } from "./Popup.js"
 
+const imgPopup = new ImgPopup('.popup_type_img', 'popup_opened', '.img-container__img', '.img-container__caption')
 const elements = document.querySelector('.elements')
 
 class Card {
@@ -16,7 +18,7 @@ class Card {
     const likeButton = this._element.querySelector('.element__like-button')
     likeButton.addEventListener('click', () => this._like(likeButton))
     this._element.querySelector('.element__remove-button').addEventListener('click', () => this._remove())
-    this._element.querySelector('.element__img').addEventListener('click', ()=>console.log('открываю картинку на экран'))
+    this._element.querySelector('.element__img').addEventListener('click', ()=>imgPopup.open(this._placeName, this._sourceLink))
   }
 
   _like(likeButton) {

@@ -49,7 +49,7 @@ class FormPopup extends Popup {
     this.formValidator.setListeners()
     this._form.addEventListener('submit', evt => evt.preventDefault())
     this._inputList.forEach(input => input.addEventListener('keydown', (evt) => {
-      evt.key === 'Enter' ? this._handleSubmit() : false
+      evt.key === 'Enter' ? this._handleSubmit : false
     }))
     this._form.addEventListener('submit', () => this._handleSubmit())
   }

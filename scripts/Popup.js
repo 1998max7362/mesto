@@ -1,4 +1,4 @@
-import { FormValidator } from "./Validation.js"
+import { FormValidator } from "./FormValidation.js"
 import { addCard } from "./card.js";
 class Popup {
   constructor(popupSelector, openPopupClassname) {
@@ -46,7 +46,7 @@ class FormPopup extends Popup {
 
   _setListeners() {
     super._setListeners()
-    this.formValidator.setListeners()
+    this.formValidator.enableValidation()
     this._form.addEventListener('submit', evt => evt.preventDefault())
     this._inputList.forEach(input => input.addEventListener('keydown', (evt) => {
       evt.key === 'Enter' ? this._handleSubmit : false

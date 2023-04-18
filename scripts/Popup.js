@@ -1,5 +1,5 @@
 import { FormValidator } from "./FormValidation.js"
-import { addCard } from "./card.js";
+
 class Popup {
   constructor(popupSelector, openPopupClassname) {
     this._popupSelector = popupSelector
@@ -48,9 +48,7 @@ class FormPopup extends Popup {
     super._setListeners()
     this.formValidator.enableValidation()
     this._form.addEventListener('submit', evt => evt.preventDefault())
-    this._inputList.forEach(input => input.addEventListener('keydown', (evt) => {
-      evt.key === 'Enter' ? this._handleSubmit : false
-    }))
+    this._form.addEventListener('keydown', (evt) => evt.key === 'Enter' ? this._handleSubmit : false )
     this._form.addEventListener('submit', () => this._handleSubmit())
   }
 }
@@ -81,13 +79,15 @@ class ProfileFormPopup extends FormPopup {
 
 
 class PlaceFormPopup extends FormPopup {
-  constructor(popupSelector, openPopupClassname, componentSelectors, cardTemplateSelector) {
+  constructor(popupSelector, openPopupClassname, componentSelectors, cardTemplateSelector, handleCardClick, addCard) {
     super(popupSelector, openPopupClassname, componentSelectors)
     this._cardTemplateSelector = cardTemplateSelector
+    this._handleCardClick = handleCardClick 
+    this._addCard = addCard
   }
 
   _handleSubmit() {
-    addCard(this._inputList[0].value, this._inputList[1].value, this._cardTemplateSelector)
+    this._addCard(this._inputList[0].value, this._inputList[1].value, this._cardTemplateSelector, this._handleCardClick)
     super.close()
   }
 

@@ -21,7 +21,7 @@ const cardList = new Section(
     },
     '.elements')
 
-    cardList.renderItems()
+cardList.renderItems()
 
 // -------------------Профиль
 const profileNameContainer = document.querySelector('.profile__name')
@@ -29,14 +29,15 @@ const profileJobContainer = document.querySelector('.profile__job')
 
 const userInfo = new UserInfo(profileNameContainer, profileJobContainer)
 
-// -----------------------Form validation
+// ------------------------Place Validation
+const placeForm = document.querySelector('#place')
+const placeValidator = new FormValidator(componentSelectors, placeForm)
+placeValidator.enableValidation()
 
-const formList = Array.from(document.querySelectorAll(componentSelectors.formSelector))
-formList.forEach((form) =>{
-    const formValidator = new FormValidator(componentSelectors, form)
-    formValidator.enableValidation()
-})
-
+// ------------------------Profile Validation
+const profileForm = document.querySelector('#name-job')
+const profileValidator = new FormValidator(componentSelectors, profileForm)
+profileValidator.enableValidation()
 
 // -----------------------Profile popup
 const editButton = document.querySelector('.profile__edit-button');
@@ -49,7 +50,14 @@ const profileFormPopup = new PopupWithForm(
         userInfo.setUserInfo(profileFormPopup._getInputValues())
         profileFormPopup.close()
     },
-    componentSelectors)
+    componentSelectors,
+    () => {
+        profileFormPopup._inputList.forEach((inputElement, id) => {
+            inputElement.value = userInfo.getUserInfo()[id]
+            profileValidator._checkInputValidity(inputElement)
+            profileValidator._toggleButtonState()
+        })
+    })
 
 editButton.addEventListener('click', () => profileFormPopup.open())
 
@@ -61,13 +69,16 @@ const placeFormPopup = new PopupWithForm(
     'popup_opened',
     '.popup__close-button',
     () => {
-        const [name,  link] = placeFormPopup._getInputValues()
+        const [name, link] = placeFormPopup._getInputValues()
         const card = new Card(name, link, '#element', handleCardClick)
         const cardElement = card.createCardElement();
         cardList.addItem(cardElement);
         placeFormPopup.close()
     },
-    componentSelectors)
+    componentSelectors,
+    () => {
+        placeValidator.disableButton()
+    })
 
 editButton.addEventListener('click', () => profileFormPopup.open())
 

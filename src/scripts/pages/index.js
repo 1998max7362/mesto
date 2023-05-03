@@ -84,6 +84,4 @@ const placeFormPopup = new PopupWithForm(
         placeValidator.disableButton()
     })
 
-editButton.addEventListener('click', () => profileFormPopup.open())
-
 addButton.addEventListener('click', () => placeFormPopup.open())

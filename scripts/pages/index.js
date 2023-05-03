@@ -1,10 +1,10 @@
-import { initialCards, componentSelectors } from "./initials.js";
-import { Card } from "./components/Card.js";
-import { Section } from "./components/Section.js";
-import { PopupWithImage } from "./components/PopupWithImage.js";
-import { UserInfo } from "./components/UserInfo.js";
-import { PopupWithForm } from "./components/PopupWithForm.js";
-import { FormValidator } from "./components/FormValidation.js";
+import { initialCards, componentSelectors } from "../utils/initials.js";
+import { Card } from "../components/Card.js";
+import { Section } from "../components/Section.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { FormValidator } from "../components/FormValidation.js";
 
 // ----------------------- Карточки
 const imgPopup = new PopupWithImage('.popup_type_img', 'popup_opened', '.popup__close-button', '.img-container__img', '.img-container__caption')

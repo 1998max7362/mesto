@@ -74,7 +74,7 @@ const placeFormPopup = new PopupWithForm(
     '.popup__close-button',
     () => {
         const [name, link] = placeFormPopup.getInputValues()
-        cardList.addItem(createCard(item.name, item.link, '#element', handleCardClick));
+        cardList.addItem(createCard(name, link, '#element', handleCardClick));
         placeFormPopup.close()
     },
     componentSelectors,

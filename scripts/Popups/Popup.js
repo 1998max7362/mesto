@@ -1,57 +1,43 @@
-import { FormValidator } from "./FormValidation.js"
+import { FormValidator } from "../FormValidation.js"
 
 class Popup {
-  constructor(popupSelector, openPopupClassname) {
+  constructor(popupSelector, openPopupClassname, popupCloseButtonSelector) {
     this._popupSelector = popupSelector
     this._openPopupClassname = openPopupClassname
+    this._popupCloseButtonSelector = popupCloseButtonSelector
     this._element = document.querySelector(popupSelector)
-    this._closeByKeyBinded = this._closeByKey.bind(this)
+    this._handleEscCloseBinded = this._handleEscClose.bind(this)
   }
   open() {
     this._element.classList.add(this._openPopupClassname)
-    document.addEventListener('keydown', this._closeByKeyBinded)
+    document.addEventListener('keydown', this._handleEscCloseBinded)
   }
 
   close() {
     this._element.classList.remove(this._openPopupClassname)
-    document.removeEventListener('keydown', this._closeByKeyBinded)
+    document.removeEventListener('keydown', this._handleEscCloseBinded)
   }
 
-  _closeByKey(evt) {
+  _handleEscClose(evt) {
     if (evt.key === 'Escape') {
       this.close()
     }
   }
 
-  _setListeners() {
-    const closeButton = this._element.querySelector('.popup__close-button')
+  setEventListeners() {
+    const closeButton = this._element.querySelector(this._popupCloseButtonSelector)
     this._element.addEventListener('click', evt => {
       (evt.target === this._element || evt.target === closeButton) ? this.close() : false
     })
   }
 }
 
-class FormPopup extends Popup {
-  constructor(popupSelector, openPopupClassname, componentSelectors) {
-    super(popupSelector, openPopupClassname)
-    this._form = this._element.querySelector(componentSelectors.formSelector)
-    this._inputList = Array.from(this._form.querySelectorAll(componentSelectors.inputSelector))
-    this.formValidator = new FormValidator(componentSelectors, this._form)
-    this._setListeners()
-  }
 
-  _handleSubmit() {
-    console.log('submit')
-  }
 
-  _setListeners() {
-    super._setListeners()
-    this.formValidator.enableValidation()
-    this._form.addEventListener('submit', evt => evt.preventDefault())
-    this._form.addEventListener('submit', () => this._handleSubmit())
-  }
-}
 
+
+
+// -----------------------------------------------------------------------------------------------------------------
 
 class ProfileFormPopup extends FormPopup {
   constructor(popupSelector, openPopupClassname, componentSelectors, profileNameSelector, profileJobSelector) {
@@ -100,20 +86,5 @@ class PlaceFormPopup extends FormPopup {
 }
 
 
-class ImgPopup extends Popup {
-  constructor(popupSelector, openPopupClassname, imgContainerSelector, imgCaptionSelector) {
-    super(popupSelector, openPopupClassname)
-    this._imgContainer = this._element.querySelector(imgContainerSelector)
-    this._imgCaption = this._element.querySelector(imgCaptionSelector)
-    super._setListeners()
-  }
 
-  open(placeName, sourceLink){
-    super.open()
-    this._imgContainer.src = sourceLink
-    this._imgContainer.alt = placeName
-    this._imgCaption.textContent = placeName
-  }
-}
-
-export { ProfileFormPopup, PlaceFormPopup, ImgPopup }
+export { ProfileFormPopup, PlaceFormPopup, ImgPopup, Popup }

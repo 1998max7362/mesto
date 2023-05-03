@@ -51,7 +51,7 @@ const profileFormPopup = new PopupWithForm(
     'popup_opened',
     '.popup__close-button',
     () => {
-        userInfo.setUserInfo(profileFormPopup._getInputValues())
+        userInfo.setUserInfo(profileFormPopup.getInputValues())
         profileFormPopup.close()
     },
     componentSelectors,
@@ -73,7 +73,7 @@ const placeFormPopup = new PopupWithForm(
     'popup_opened',
     '.popup__close-button',
     () => {
-        const [name, link] = placeFormPopup._getInputValues()
+        const [name, link] = placeFormPopup.getInputValues()
         const card = new Card(name, link, '#element', handleCardClick)
         const cardElement = card.createCardElement();
         cardList.addItem(cardElement);

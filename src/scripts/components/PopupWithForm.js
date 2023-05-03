@@ -20,7 +20,7 @@ export class PopupWithForm extends Popup {
     this._form.reset()
   }
 
-  _getInputValues() {
+  getInputValues() {
     return this._inputList.map(input => input.value)
   }
 

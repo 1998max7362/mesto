@@ -11,13 +11,16 @@ import '../../pages/index.css'; // добавьте импорт главног�
 const imgPopup = new PopupWithImage('.popup_type_img', 'popup_opened', '.popup__close-button', '.img-container__img', '.img-container__caption')
 const handleCardClick = imgPopup.open.bind(imgPopup)
 
+const createCard = (placeName, sourceLink, templateSelector, handleCardClick) => {
+    const card = new Card(placeName, sourceLink, templateSelector, handleCardClick)
+    return card.createCardElement()
+}
+
 const cardList = new Section(
     {
         items: initialCards,
         renderer: (item) => {
-            const card = new Card(item.name, item.link, '#element', handleCardClick)
-            const cardElement = card.createCardElement();
-            cardList.addItem(cardElement);
+            cardList.addItem(createCard(item.name, item.link, '#element', handleCardClick));
         }
     },
     '.elements')

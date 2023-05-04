@@ -56,10 +56,10 @@ const profileFormPopup = new PopupWithForm(
     },
     componentSelectors,
     () => {
-        profileFormPopup._inputList.forEach((inputElement, id) => {
+        profileFormPopup.inputList.forEach((inputElement, id) => {
             inputElement.value = userInfo.getUserInfo()[id]
-            profileValidator._checkInputValidity(inputElement)
-            profileValidator._toggleButtonState()
+            profileValidator.checkInputValidity(inputElement)
+            profileValidator.toggleButtonState()
         })
     })
 

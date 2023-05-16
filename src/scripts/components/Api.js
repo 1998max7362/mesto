@@ -1,6 +1,7 @@
+import { data } from "autoprefixer";
 
 
-class Api {
+export class Api {
   constructor({ baseUrl, headers }) {
     this.headers = headers
     this.baseUrl = baseUrl
@@ -13,7 +14,7 @@ class Api {
     })
       .then(res => {
         if (res.ok) {
-          return res.json();
+          return res.json()
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
@@ -77,7 +78,7 @@ class Api {
       });
   }
 
-  async postCard(name,link) {
+  async postCard(name, link) {
     try {
       const res = await fetch(`${this.baseUrl}/cards`, {
         headers: this.headers,
@@ -145,10 +146,3 @@ class Api {
 // ---------------------------------
 
 
-const api = new Api({
-  baseUrl: url,
-  headers: {
-    authorization: token,
-    'Content-Type': 'application/json'
-  }
-});

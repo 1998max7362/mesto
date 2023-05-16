@@ -1,8 +1,8 @@
 class Card {
-  constructor(placeName, sourceLink, templateSelector, handleCardClick ) {
+  constructor({name, link}, templateSelector, handleCardClick ) {
     this._templateSelector = templateSelector
-    this._placeName = placeName
-    this._sourceLink = sourceLink
+    this._placeName = name
+    this._sourceLink = link
     this._isLiked = false
     this._handleCardClick = handleCardClick 
     this._element = this._getTemplate()

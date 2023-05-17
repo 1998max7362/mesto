@@ -76,11 +76,25 @@ editButton.addEventListener('click', () => profileFormPopup.open())
 
 // ------------------------ Card popup
 const addButton = document.querySelector('.profile__add-button');
+const placeFormPopup = new PopupWithForm(
+  '.popup_type_card',
+  'popup_opened',
+  '.popup__close-button',
+  () => {
+    const [name, link] = placeFormPopup.getInputValues()
+    cardList.addItem(createCard(name, link, '#element', handleCardClick));
+    placeFormPopup.close()
+  },
+  componentSelectors,
+  () => {
+    placeValidator.disableButton()
+  })
+
+addButton.addEventListener('click', () => placeFormPopup.open())
 
 
 
-
-// --------------------- ИНИЦИАЛИЗАЦИЯ СТРАНИЦЫ
+// --------------------- Page init with server data
 Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
 
   // ---------Профиль (заполнение данных юзера)
@@ -89,22 +103,5 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
   // ---------Карточки и попап картинки (рендер)
   cardList.setItems(initialCards)
   cardList.renderItems()
-
-  const placeFormPopup = new PopupWithForm(
-    '.popup_type_card',
-    'popup_opened',
-    '.popup__close-button',
-    () => {
-      const [name, link] = placeFormPopup.getInputValues()
-      cardList.addItem(createCard(name, link, '#element', handleCardClick));
-      placeFormPopup.close()
-    },
-    componentSelectors,
-    () => {
-      placeValidator.disableButton()
-    })
-
-  addButton.addEventListener('click', () => placeFormPopup.open())
-
 }
 )

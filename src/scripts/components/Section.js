@@ -6,9 +6,8 @@ class Section {
         this._contanerElement = document.querySelector(containerSelector)
     }
     renderItems() {
-        this._items.then(items =>{
-            items.forEach(item => this._renderer(item));
-        })
+        console.log('this._items', this._items)
+        this._items.forEach(item => this._renderer(item));
     }
     clear() {
         this._contanerElement.innerHTML = '';
@@ -16,6 +15,9 @@ class Section {
     addItem(element) {
         this._contanerElement.prepend(element);
     }
+    setItems(items) {
+        this._items = items
+    }
 }
 
-export {Section}
+export { Section }

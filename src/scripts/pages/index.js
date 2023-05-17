@@ -20,12 +20,12 @@ const api = new Api({
 const initialCards = api.getInitialCards()
 const userData = api.getUserData()
 
-// ----------------------- Попап картинки 
+// ----------------------- Image Popup 
 const imgPopup = new PopupWithImage('.popup_type_img', 'popup_opened', '.popup__close-button', '.img-container__img', '.img-container__caption')
 const handleCardClick = imgPopup.open.bind(imgPopup)
 
 
-// ----------------------- Карточки 
+// ----------------------- Cards 
 const createCard = (cardInfo, templateSelector, handleCardClick) => {
   const card = new Card(cardInfo, templateSelector, handleCardClick)
   return card.createCardElement()
@@ -41,7 +41,7 @@ const cardList = new Section(
   '.elements')
 
 
-// -------------------Профиль
+// -------------------User Profile
 const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar')
 
 // ------------------------Place Validation

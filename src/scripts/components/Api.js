@@ -78,7 +78,7 @@ export class Api {
       });
   }
 
-  async postCard(name, link) {
+  async postCard([name, link]) {
     try {
       const res = await fetch(`${this.baseUrl}/cards`, {
         headers: this.headers,
@@ -87,7 +87,7 @@ export class Api {
           name,
           link,
         })
-      });
+      })
       if (res.ok) {
         return await res.json();
       }

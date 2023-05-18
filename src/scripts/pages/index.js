@@ -101,10 +101,16 @@ const placeFormPopup = new PopupWithForm(
   'popup_opened',
   '.popup__close-button',
   componentSelectors,
-  () => {
-    const [name, link] = placeFormPopup.getInputValues()
-    cardList.addItem(createCard(name, link, '#element', handleCardClick));
-    placeFormPopup.close()
+  async () => {
+    setSubmitButtonLoading(placeValidator)
+    try{
+      cardList.addItem(createCard(await api.postCard(placeFormPopup.getInputValues()), '#element', handleCardClick));
+      placeFormPopup.close()
+    }
+    catch{
+      console.log('Не удалось загрузить картинку')
+    }
+    setSubmitButtonCommon(placeValidator)
   },
   () => {
     placeValidator.disableButton()

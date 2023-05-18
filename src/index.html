@@ -38,21 +38,37 @@
                 <img class="element__img" src="Заглушка (ссылка на картинку)" alt="Заглушка">
                 <div class="element__info">
                     <h2 class="element__name">Заглушка (название места)</h2>
-                    <button class="element__like-button" aria-label="Кнопка лайк" type="button" value=" "></button>
+                    <div>
+                        <button class="element__like-button" aria-label="Кнопка лайк" type="button" value=" "></button>
+                        <p class="element__like-counter"></p>
+                    </div>
+                    
                 </div>  
                 <button class="element__remove-button" aria-label="Кнопка удалить" type="button" value=" "></button>
             </div>
         </template>
+
+        <div class="popup_opened popup popup_type_approve">
+            <div class="popup__container">
+                <button type="button" class="popup__close-button" aria-label="Close"></button>
+                <form class="form" name="name&job-form" id="approve" novalidate>
+                    <h2 class="form__name">Вы уверены?</h2>
+                    <button type="submit" class="form__save-button" aria-label="Сохранить">Да</button>
+                </form>
+            </div>
+        </div>
 
         <div class="popup popup_type_profile">
             <div class="popup__container">
                 <button type="button" class="popup__close-button" aria-label="Close"></button>
                 <form class="form" name="name&job-form" id="name-job" novalidate>
                     <h2 class="form__name">Редактировать профиль</h2>
-                    <input class="form__input form__input_el_first" placeholder="Имя" id="profile_name" type="text" name="Имя" aria-label="Имя" required minlength="2" maxlength="40">
-                    <span class="form__input-error" id="profile_name-input-error"></span>
-                    <input class="form__input form__input_el_second" placeholder="Предназначение" id="Job" type="text" name="Предназначение" aria-label="Предназначение" required minlength="2" maxlength="200">
-                    <span class="form__input-error " id="Job-input-error"></span>
+                    <div class="form__input-container">
+                        <input class="form__input form__input_el_first" placeholder="Имя" id="profile_name" type="text" name="Имя" aria-label="Имя" required minlength="2" maxlength="40">
+                        <span class="form__input-error" id="profile_name-input-error"></span>
+                        <input class="form__input form__input_el_second" placeholder="Предназначение" id="Job" type="text" name="Предназначение" aria-label="Предназначение" required minlength="2" maxlength="200">
+                        <span class="form__input-error " id="Job-input-error"></span>
+                    </div>
                     <button type="submit" class="form__save-button" aria-label="Сохранить">Сохранить</button>
                 </form>
             </div>
@@ -63,10 +79,12 @@
                 <button type="button" class="popup__close-button" aria-label="Close"></button>
                 <form class="form" name="place-form" id="place" novalidate>
                     <h2 class="form__name">Новое место</h2>
-                    <input class="form__input form__input_el_first" placeholder="Название" id="place_name" type="text" name="Название" aria-label="Название" required minlength="2" maxlength="30">
-                    <span class="form__input-error" id="place_name-input-error"></span>
-                    <input class="form__input form__input_el_second" placeholder="Ссылка на картинку" id="source_link" type="url" name="Ссылка на картинку" required aria-label="Ссылка на картинку">
-                    <span class="form__input-error" id="source_link-input-error"></span>
+                    <div class="form__input-container">
+                        <input class="form__input form__input_el_first" placeholder="Название" id="place_name" type="text" name="Название" aria-label="Название" required minlength="2" maxlength="30">
+                        <span class="form__input-error" id="place_name-input-error"></span>
+                        <input class="form__input form__input_el_second" placeholder="Ссылка на картинку" id="source_link" type="url" name="Ссылка на картинку" required aria-label="Ссылка на картинку">
+                        <span class="form__input-error" id="source_link-input-error"></span>
+                    </div>
                     <button type="submit" class="form__save-button" aria-label="Создать">Создать</button>
                 </form>
             </div>

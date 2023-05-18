@@ -37,4 +37,6 @@ const componentSelectors = {
 const url = 'https://mesto.nomoreparties.co/v1/cohort-66'
 const token = 'ca5fd122-a691-446a-99ee-768a0f5461ba'
 
+// const url = 'https://mesto.nomoreparties.co/v1/cohort-661'
+
 export {initialCards, componentSelectors, url, token}

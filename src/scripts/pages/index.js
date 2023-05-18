@@ -54,6 +54,17 @@ const profileForm = document.querySelector('#name-job')
 const profileValidator = new FormValidator(componentSelectors, profileForm)
 profileValidator.enableValidation()
 
+// ------------------------ Loading Button state
+const setSubmitButtonCommon = (formValidatior) =>{
+  formValidatior.submitButton.textContent = 'Сохраненить'
+  formValidatior.enableButton()
+}
+
+const setSubmitButtonLoading = (formValidatior) =>{
+  formValidatior.submitButton.textContent = 'Сохранение...'
+  formValidatior.disableButton()
+}
+
 // -----------------------Profile popup
 const editButton = document.querySelector('.profile__edit-button');
 
@@ -61,11 +72,18 @@ const profileFormPopup = new PopupWithForm(
   '.popup_type_profile',
   'popup_opened',
   '.popup__close-button',
-  () => {
-    userInfo.setUserInfo(profileFormPopup.getInputValues())
-    profileFormPopup.close()
-  },
   componentSelectors,
+  async () => {
+    setSubmitButtonLoading(profileValidator)
+    try{
+      userInfo.setUserInfo(await api.patchUserData(profileFormPopup.getInputValues()))
+      profileFormPopup.close()
+    }
+    catch{
+      console.log('Не удалось изменить данные профиля')
+    }
+    setSubmitButtonCommon(profileValidator)
+  },
   () => {
     profileFormPopup.inputList.forEach((inputElement, id) => {
       inputElement.value = userInfo.getUserInfo()[id]
@@ -82,12 +100,12 @@ const placeFormPopup = new PopupWithForm(
   '.popup_type_card',
   'popup_opened',
   '.popup__close-button',
+  componentSelectors,
   () => {
     const [name, link] = placeFormPopup.getInputValues()
     cardList.addItem(createCard(name, link, '#element', handleCardClick));
     placeFormPopup.close()
   },
-  componentSelectors,
   () => {
     placeValidator.disableButton()
   })
@@ -101,7 +119,7 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
 
   // ---------Профиль (заполнение данных юзера)
   userInfo.setUserAvatar(userData.avatar)
-  userInfo.setUserInfo([userData.name, userData.about])
+  userInfo.setUserInfo(userData)
   // ---------Карточки и попап картинки (рендер)
   cardList.setItems(initialCards)
   cardList.renderItems()

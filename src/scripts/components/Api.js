@@ -1,11 +1,10 @@
-import { data } from "autoprefixer";
-
 
 export class Api {
   constructor({ baseUrl, headers }) {
     this.headers = headers
     this.baseUrl = baseUrl
   }
+
 
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
@@ -39,7 +38,8 @@ export class Api {
       });
   }
 
-  patchUserData(name, about) {
+  patchUserData([name,about]) {
+    console.log(`${name}, ${about}`)
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers,
       method: 'PATCH',

@@ -8,9 +8,9 @@ export class UserInfo {
     getUserInfo() {
         return [this._profileNameContainer.textContent, this._profileJobContainer.textContent]
     }
-    setUserInfo([name, job]) {
+    setUserInfo({name, about}) {
         this._profileNameContainer.textContent = name
-        this._profileJobContainer.textContent = job
+        this._profileJobContainer.textContent = about
     }
     setUserAvatar(avatarLink){
         this._avatarContainer.src = avatarLink

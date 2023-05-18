@@ -6,7 +6,6 @@ class Section {
         this._contanerElement = document.querySelector(containerSelector)
     }
     renderItems() {
-        console.log('this._items', this._items)
         this._items.forEach(item => this._renderer(item));
     }
     clear() {

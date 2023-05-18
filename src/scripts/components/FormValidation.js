@@ -7,14 +7,14 @@ class FormValidator {
     this._inputErrorClass = componentSelectors.inputErrorClass
 
     this._inputList = Array.from(form.querySelectorAll(componentSelectors.inputSelector))
-    this._submitButton = form.querySelector(componentSelectors.submitButtonSelector)
+    this.submitButton = form.querySelector(componentSelectors.submitButtonSelector)
   }
 
   toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this.disableButton(this._submitButton, this._inactiveButtonClass)
+      this.disableButton(this.submitButton, this._inactiveButtonClass)
     } else {
-      this.enableButton(this._submitButton, this._inactiveButtonClass)
+      this.enableButton(this.submitButton, this._inactiveButtonClass)
     }
   }
 
@@ -46,13 +46,13 @@ class FormValidator {
 
 
   disableButton() {
-    this._submitButton.classList.add(this._inactiveButtonClass);
-    this._submitButton.disabled = true
+    this.submitButton.classList.add(this._inactiveButtonClass);
+    this.submitButton.disabled = true
   }
 
   enableButton() {
-    this._submitButton.classList.remove(this._inactiveButtonClass);
-    this._submitButton.disabled = false
+    this.submitButton.classList.remove(this._inactiveButtonClass);
+    this.submitButton.disabled = false
   }
 
   enableValidation() {

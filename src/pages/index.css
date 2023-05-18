@@ -22,6 +22,7 @@
 @import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/element/__like-button/_checked/element__like-button_checked.css);
 @import url(../blocks/element/__remove-button/element__remove-button.css);
+@import url(../blocks/element/__remove-button/_disabled/element__remove-button_disabled.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

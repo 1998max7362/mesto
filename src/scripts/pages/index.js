@@ -64,7 +64,7 @@ const setSubmitButtonLoading = (formValidatior) =>{
 //   },
 //   '.elements')
 
-// -------------------- Render page with server data
+// -------------------- RENDER PAGE WITH SERVER DATA
 Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
   console.log('userData',userData)
   console.log('initialCards',initialCards)
@@ -72,7 +72,7 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
     const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar',userData)
     // ---------Карточки и попап картинки (рендер)
 
-
+// -----------------------Profile popup
     const profileFormPopup = new PopupWithForm(
       '.popup_type_profile',
       'popup_opened',
@@ -100,18 +100,6 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
     editButton.addEventListener('click', () => profileFormPopup.open())
   }
   )
-
-
-
-
-
-
-
-
-
-
-
-// -----------------------Profile popup
 
 
 

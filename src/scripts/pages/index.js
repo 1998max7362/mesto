@@ -11,6 +11,7 @@ import '../../pages/index.css'; // добавьте импорт главног�
 // ---------------------- Page buttons
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
+const editAvatarButton = document.querySelector('.profile__avatar-edit-button');
 
 // ------------------------API
 const api = new Api({
@@ -28,32 +29,39 @@ const userData = api.getUserData()
 const imgPopup = new PopupWithImage('.popup_type_img', 'popup_opened', '.popup__close-button', '.img-container__img', '.img-container__caption')
 const handleCardClick = imgPopup.open.bind(imgPopup)
 
-// ------------------------Place Validation
+// ------------------------Place Form Validation
 const placeForm = document.querySelector('#place')
 const placeValidator = new FormValidator(componentSelectors, placeForm)
 placeValidator.enableValidation()
 
-// ------------------------Profile Validation
+// ------------------------Profile Form Validation
 const profileForm = document.querySelector('#name-job')
 const profileValidator = new FormValidator(componentSelectors, profileForm)
 profileValidator.enableValidation()
 
-// ------------------------ Loading Button state
-const setSubmitButtonCommon = (formValidatior) =>{
+// ------------------------Avatar Form Validation
+const avatarForm = document.querySelector('#avatar')
+const avatarValidator = new FormValidator(componentSelectors, avatarForm)
+avatarValidator.enableValidation()
+
+// ------------------------Button state "Loading"
+const setSubmitButtonCommon = (formValidatior) => {
   formValidatior.submitButton.textContent = 'Сохраненить'
   formValidatior.enableButton()
 }
 
-const setSubmitButtonLoading = (formValidatior) =>{
+const setSubmitButtonLoading = (formValidatior) => {
   formValidatior.submitButton.textContent = 'Сохранение...'
   formValidatior.disableButton()
 }
 
+
+
 // ----------------------- Cards 
-// const createCard = (cardData, templateSelector, handleCardClick) => {
-//   const card = new Card(cardData, templateSelector, handleCardClick)
-//   return card.createCardElement()
-// }
+const createCard = (cardData, templateSelector, handleCardClick) => {
+  const card = new Card(cardData, templateSelector, handleCardClick)
+  return card.createCardElement()
+}
 
 // const cardList = new Section(
 //   {
@@ -64,42 +72,62 @@ const setSubmitButtonLoading = (formValidatior) =>{
 //   },
 //   '.elements')
 
+
 // -------------------- RENDER PAGE WITH SERVER DATA
 Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
-  console.log('userData',userData)
-  console.log('initialCards',initialCards)
-    // ---------Профиль (заполнение данных юзера)
-    const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar',userData)
-    // ---------Карточки и попап картинки (рендер)
+  console.log('userData', userData)
+  console.log('initialCards', initialCards)
+  // ---------Профиль (заполнение данных юзера)
+  const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar', userData)
+  // ---------Карточки и попап картинки (рендер)
 
-// -----------------------Profile popup
-    const profileFormPopup = new PopupWithForm(
-      '.popup_type_profile',
-      'popup_opened',
-      '.popup__close-button',
-      componentSelectors,
-      async () => {
-        setSubmitButtonLoading(profileValidator)
-        try{
-          userInfo.setUserInfo(await api.patchUserData(profileFormPopup.getInputValues()))
-          profileFormPopup.close()
-        }
-        catch{
-          console.log('Не удалось изменить данные профиля')
-        }
-        setSubmitButtonCommon(profileValidator)
-      },
-      () => {
-        profileFormPopup.inputList.forEach((inputElement, id) => {
-          inputElement.value = userInfo.getUserInfo()[id]
-          profileValidator.checkInputValidity(inputElement)
-          profileValidator.toggleButtonState()
-        })
+  // -----------------------Profile popup
+  const profileFormPopup = new PopupWithForm(
+    '.popup_type_profile',
+    'popup_opened',
+    '.popup__close-button',
+    componentSelectors,
+    async () => {
+      setSubmitButtonLoading(profileValidator)
+      try {
+        userInfo.setUserInfo(await api.patchUserData(profileFormPopup.getInputValues()))
+        profileFormPopup.close()
+      }
+      catch {
+        console.log('Не удалось изменить данные профиля')
+      }
+      setSubmitButtonCommon(profileValidator)
+    },
+    () => {
+      profileFormPopup.inputList.forEach((inputElement, id) => {
+        inputElement.value = userInfo.getUserInfo()[id]
+        profileValidator.checkInputValidity(inputElement)
+        profileValidator.toggleButtonState()
       })
-    
-    editButton.addEventListener('click', () => profileFormPopup.open())
-  }
+    })
+  editButton.addEventListener('click', () => profileFormPopup.open())
+
+  // ------------------------ Avatar Change Popup
+  const avatarFormPopup = new PopupWithForm(
+    '.popup_type_avatar',
+    'popup_opened',
+    '.popup__close-button',
+    componentSelectors,
+    async () => {
+      setSubmitButtonLoading(avatarValidator)
+      try {
+        userInfo.setUserAvatar(await api.updateAvatar(avatarFormPopup.getInputValues()))
+        avatarFormPopup.close()
+      }
+      catch {
+        console.log('Не удалось изменить данные профиля')
+      }
+      setSubmitButtonCommon(avatarValidator)
+    },
   )
+  editAvatarButton.addEventListener('click', () => avatarFormPopup.open())
+}
+)
 
 
 
@@ -113,11 +141,11 @@ const placeFormPopup = new PopupWithForm(
   componentSelectors,
   async () => {
     setSubmitButtonLoading(placeValidator)
-    try{
+    try {
       cardList.addItem(createCard(await api.postCard(placeFormPopup.getInputValues()), '#element', handleCardClick));
       placeFormPopup.close()
     }
-    catch{
+    catch {
       console.log('Не удалось загрузить картинку')
     }
     setSubmitButtonCommon(placeValidator)

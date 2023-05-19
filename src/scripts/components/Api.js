@@ -59,7 +59,7 @@ export class Api {
       });
   }
 
-  updateAvatar(avatar) {
+  updateAvatar([avatar]) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       headers: this.headers,
       method: 'PATCH',

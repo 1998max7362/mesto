@@ -22,8 +22,8 @@ export class UserInfo {
         this._renderUserInfo()
     }
 
-    setUserAvatar(avatarLink){
-        this._changeUserAvatar(avatarLink)
+    setUserAvatar({avatar}){
+        this._changeUserAvatar(avatar)
         this._renderUserAvatar()
     }
 

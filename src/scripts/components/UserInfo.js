@@ -10,28 +10,28 @@ export class UserInfo {
         this._renderUserAvatar()
     }
     getUserInfo() {
-        return [this.userData.name, this.userData.about]
+        return [this._userData.name, this._userData.about]
     }
 
     getUserId() {
-        return this.userData._id
+        return this._userData._id
     }
 
     setUserInfo({name, about}) {
-        this.userData.name = name
-        this.userData.about = about
+        this._userData.name = name
+        this._userData.about = about
     }
 
     _renderUserInfo() {
-        this._profileNameContainer.textContent = this.userData.name
-        this._profileJobContainer.textContent = this.userData.about
+        this._profileNameContainer.textContent = this._userData.name
+        this._profileJobContainer.textContent = this._userData.about
     }
 
     setUserAvatar(avatarLink){
-        this.userData.avatar = avatarLink
+        this._userData.avatar = avatarLink
     }
 
     _renderUserAvatar() {
-        this._avatarContainer.src = this.userData.avatar
+        this._avatarContainer.src = this._userData.avatar
     }
 }

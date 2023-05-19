@@ -39,7 +39,6 @@ export class Api {
   }
 
   patchUserData([name,about]) {
-    console.log(`${name}, ${about}`)
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers,
       method: 'PATCH',

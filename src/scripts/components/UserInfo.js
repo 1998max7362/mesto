@@ -18,6 +18,16 @@ export class UserInfo {
     }
 
     setUserInfo({name, about}) {
+        this._changeUserInfo(name, about)
+        this._renderUserInfo()
+    }
+
+    setUserAvatar(avatarLink){
+        this._changeUserAvatar(avatarLink)
+        this._renderUserAvatar()
+    }
+
+    _changeUserInfo(name, about) {
         this._userData.name = name
         this._userData.about = about
     }
@@ -27,7 +37,7 @@ export class UserInfo {
         this._profileJobContainer.textContent = this._userData.about
     }
 
-    setUserAvatar(avatarLink){
+    _changeUserAvatar(avatarLink) {
         this._userData.avatar = avatarLink
     }
 

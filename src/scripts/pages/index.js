@@ -8,6 +8,10 @@ import { FormValidator } from "../components/FormValidation.js";
 import { Api } from "../components/APi.js";
 import '../../pages/index.css'; // добавьте импорт главного файла стилей
 
+// ---------------------- Page buttons
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+
 // ------------------------API
 const api = new Api({
   baseUrl: url,
@@ -23,21 +27,6 @@ const userData = api.getUserData()
 // ----------------------- Image Popup 
 const imgPopup = new PopupWithImage('.popup_type_img', 'popup_opened', '.popup__close-button', '.img-container__img', '.img-container__caption')
 const handleCardClick = imgPopup.open.bind(imgPopup)
-
-// ----------------------- Cards 
-// const createCard = (cardData, templateSelector, handleCardClick) => {
-//   const card = new Card(cardData, templateSelector, handleCardClick)
-//   return card.createCardElement()
-// }
-
-// const cardList = new Section(
-//   {
-//     items: [],
-//     renderer: (item) => {
-//       cardList.addItem(createCard(item, '#element', handleCardClick));
-//     }
-//   },
-//   '.elements')
 
 // ------------------------Place Validation
 const placeForm = document.querySelector('#place')
@@ -60,9 +49,20 @@ const setSubmitButtonLoading = (formValidatior) =>{
   formValidatior.disableButton()
 }
 
-// ---------------------- Page buttons
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
+// ----------------------- Cards 
+// const createCard = (cardData, templateSelector, handleCardClick) => {
+//   const card = new Card(cardData, templateSelector, handleCardClick)
+//   return card.createCardElement()
+// }
+
+// const cardList = new Section(
+//   {
+//     items: [],
+//     renderer: (item) => {
+//       cardList.addItem(createCard(item, '#element', handleCardClick));
+//     }
+//   },
+//   '.elements')
 
 // -------------------- Render page with server data
 Promise.all([initialCards, userData]).then(([initialCards, userData]) => {

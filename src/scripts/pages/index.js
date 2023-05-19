@@ -24,12 +24,6 @@ const userData = api.getUserData()
 const imgPopup = new PopupWithImage('.popup_type_img', 'popup_opened', '.popup__close-button', '.img-container__img', '.img-container__caption')
 const handleCardClick = imgPopup.open.bind(imgPopup)
 
-
-
-
-
-
-
 // ----------------------- Cards 
 // const createCard = (cardData, templateSelector, handleCardClick) => {
 //   const card = new Card(cardData, templateSelector, handleCardClick)
@@ -44,29 +38,6 @@ const handleCardClick = imgPopup.open.bind(imgPopup)
 //     }
 //   },
 //   '.elements')
-
-
-
-Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
-  console.log('userData',userData)
-  console.log('initialCards',initialCards)
-    // ---------Профиль (заполнение данных юзера)
-    const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar',userData)
-    // ---------Карточки и попап картинки (рендер)
-
-  }
-  )
-
-
-// -------------------User Profile
-// const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar',userData)
-
-
-
-
-
-
-
 
 // ------------------------Place Validation
 const placeForm = document.querySelector('#place')
@@ -89,37 +60,64 @@ const setSubmitButtonLoading = (formValidatior) =>{
   formValidatior.disableButton()
 }
 
-// -----------------------Profile popup
+// ---------------------- Page buttons
 const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
 
-const profileFormPopup = new PopupWithForm(
-  '.popup_type_profile',
-  'popup_opened',
-  '.popup__close-button',
-  componentSelectors,
-  async () => {
-    setSubmitButtonLoading(profileValidator)
-    try{
-      userInfo.setUserInfo(await api.patchUserData(profileFormPopup.getInputValues()))
-      profileFormPopup.close()
-    }
-    catch{
-      console.log('Не удалось изменить данные профиля')
-    }
-    setSubmitButtonCommon(profileValidator)
-  },
-  () => {
-    profileFormPopup.inputList.forEach((inputElement, id) => {
-      inputElement.value = userInfo.getUserInfo()[id]
-      profileValidator.checkInputValidity(inputElement)
-      profileValidator.toggleButtonState()
-    })
-  })
+// -------------------- Render page with server data
+Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
+  console.log('userData',userData)
+  console.log('initialCards',initialCards)
+    // ---------Профиль (заполнение данных юзера)
+    const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar',userData)
+    // ---------Карточки и попап картинки (рендер)
 
-editButton.addEventListener('click', () => profileFormPopup.open())
+
+    const profileFormPopup = new PopupWithForm(
+      '.popup_type_profile',
+      'popup_opened',
+      '.popup__close-button',
+      componentSelectors,
+      async () => {
+        setSubmitButtonLoading(profileValidator)
+        try{
+          userInfo.setUserInfo(await api.patchUserData(profileFormPopup.getInputValues()))
+          profileFormPopup.close()
+        }
+        catch{
+          console.log('Не удалось изменить данные профиля')
+        }
+        setSubmitButtonCommon(profileValidator)
+      },
+      () => {
+        profileFormPopup.inputList.forEach((inputElement, id) => {
+          inputElement.value = userInfo.getUserInfo()[id]
+          profileValidator.checkInputValidity(inputElement)
+          profileValidator.toggleButtonState()
+        })
+      })
+    
+    editButton.addEventListener('click', () => profileFormPopup.open())
+  }
+  )
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------Profile popup
+
+
+
 
 // ------------------------ Card popup
-const addButton = document.querySelector('.profile__add-button');
+
 const placeFormPopup = new PopupWithForm(
   '.popup_type_card',
   'popup_opened',

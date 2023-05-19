@@ -25,24 +25,48 @@ const imgPopup = new PopupWithImage('.popup_type_img', 'popup_opened', '.popup__
 const handleCardClick = imgPopup.open.bind(imgPopup)
 
 
-// ----------------------- Cards 
-const createCard = (cardInfo, templateSelector, handleCardClick) => {
-  const card = new Card(cardInfo, templateSelector, handleCardClick)
-  return card.createCardElement()
-}
 
-const cardList = new Section(
-  {
-    items: [],
-    renderer: (item) => {
-      cardList.addItem(createCard(item, '#element', handleCardClick));
-    }
-  },
-  '.elements')
+
+
+
+
+// ----------------------- Cards 
+// const createCard = (cardData, templateSelector, handleCardClick) => {
+//   const card = new Card(cardData, templateSelector, handleCardClick)
+//   return card.createCardElement()
+// }
+
+// const cardList = new Section(
+//   {
+//     items: [],
+//     renderer: (item) => {
+//       cardList.addItem(createCard(item, '#element', handleCardClick));
+//     }
+//   },
+//   '.elements')
+
+
+
+Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
+  console.log('userData',userData)
+  console.log('initialCards',initialCards)
+    // ---------Профиль (заполнение данных юзера)
+    const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar',userData)
+    // ---------Карточки и попап картинки (рендер)
+
+  }
+  )
 
 
 // -------------------User Profile
-const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar')
+// const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar',userData)
+
+
+
+
+
+
+
 
 // ------------------------Place Validation
 const placeForm = document.querySelector('#place')
@@ -117,17 +141,3 @@ const placeFormPopup = new PopupWithForm(
   })
 
 addButton.addEventListener('click', () => placeFormPopup.open())
-
-
-
-// --------------------- Page init with server data
-Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
-
-  // ---------Профиль (заполнение данных юзера)
-  userInfo.setUserAvatar(userData.avatar)
-  userInfo.setUserInfo(userData)
-  // ---------Карточки и попап картинки (рендер)
-  cardList.setItems(initialCards)
-  cardList.renderItems()
-}
-)

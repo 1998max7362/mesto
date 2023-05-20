@@ -1,5 +1,5 @@
 class Card {
-  constructor(templateSelector, userId, cardData, handleCardClick, handleAddLike, handleDeleteLike, handleDelete) {
+  constructor(templateSelector, cardData, handleCardClick, handleAddLike, handleDeleteLike, handleDelete) {
     this._templateSelector = templateSelector
     this._element = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
     this._likeButton = this._element.querySelector('.element__like-button')
@@ -8,16 +8,13 @@ class Card {
     this._img = this._element.querySelector('.element__img')
     this._cardName = this._element.querySelector('.element__name')
 
-    this._userId = userId
-
     this._cardData = cardData
     this._handleCardClick = handleCardClick
     this._handleAddLike = handleAddLike
     this._handleDeleteLike = handleDeleteLike
     this._handleDelete = handleDelete
 
-    this._checkIsLiked()
-    this._renderLike()
+
   }
 
   createCardElement() {
@@ -39,6 +36,13 @@ class Card {
     return this._cardData._id
   }
 
+  checkIsLikedUser(userId) {
+    this._cardData.likes.some(user => user._id === userId)
+      ? this._isLiked = true
+      : this._isLiked = false
+    this._renderLike()
+  }
+
   _setListeners() {
     this._likeButton.addEventListener('click', () => this._like())
     this._removeButton.addEventListener('click', () => this._remove())
@@ -49,12 +53,10 @@ class Card {
     if (this._isLiked) {
       await this._handleDeleteLike()
       this._setLikeCount()
-      this._checkIsLiked()
       this._renderLike()
     } else {
       await this._handleAddLike()
       this._setLikeCount()
-      this._checkIsLiked()
       this._renderLike()
     }
   }
@@ -63,11 +65,7 @@ class Card {
     this._likeCounter.textContent = this._cardData.likes.length
   }
 
-  _checkIsLiked() {
-    this._cardData.likes.some(user => user._id === this._userId)
-      ? this._isLiked = true
-      : this._isLiked = false
-  }
+
 
   _renderLike() {
     if (this._isLiked) {
@@ -78,7 +76,8 @@ class Card {
   }
 
   _remove() {
-    this._element.remove()
+    this._handleDelete()
+    // this._element.remove()
   }
 }
 

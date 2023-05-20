@@ -78,6 +78,9 @@ export class Api {
   }
 
   async postCard([name, link]) {
+    console.log('post',`${this.baseUrl}/cards`)
+    console.log('name',name)
+    console.log('link',link)
     try {
       const res = await fetch(`${this.baseUrl}/cards`, {
         headers: this.headers,
@@ -88,6 +91,7 @@ export class Api {
         })
       })
       if (res.ok) {
+        console.log('res',res)
         return await res.json();
       }
       throw new Error(res.status);
@@ -102,6 +106,7 @@ export class Api {
         headers: this.headers,
         method: 'DELETE',
       });
+      console.log('res',res)
       if (res.ok) {
         return await res.json();
       }

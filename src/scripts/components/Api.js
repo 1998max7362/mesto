@@ -5,85 +5,65 @@ export class Api {
     this.baseUrl = baseUrl
   }
 
-
-  getInitialCards() {
-    return fetch(`${this.baseUrl}/cards`, {
-      headers: this.headers,
-      method: 'GET',
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err)
-      });
-  }
-
-  getUserData() {
-    return fetch(`${this.baseUrl}/users/me`, {
-      headers: this.headers,
-      method: 'GET'
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err)
-      });
-  }
-
-  patchUserData([name,about]) {
-    return fetch(`${this.baseUrl}/users/me`, {
-      headers: this.headers,
-      method: 'PATCH',
-      body: JSON.stringify({
-        name,
-        about,
-      })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err)
-      });
-  }
-
-  updateAvatar([avatar]) {
-    return fetch(`${this.baseUrl}/users/me/avatar`, {
-      headers: this.headers,
-      method: 'PATCH',
-      body: JSON.stringify({
-        avatar,
-      })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err)
-      });
-  }
-
-  async postCard([name, link]) {
+  async getInitialCards() {
     try {
-      const body = JSON.stringify({
-        name,
-        link
+      const res = await fetch(`${this.baseUrl}/cards`, {
+        headers: this.headers,
+        method: 'GET',
       })
-      console.log('body',body)
+      return this._getResposeData(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async getUserData() {
+    try {
+      const res = await fetch(`${this.baseUrl}/users/me`, {
+        headers: this.headers,
+        method: 'GET'
+      })
+      return this._getResposeData(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async patchUserData({name, about}) {
+    try {
+      const res = await fetch(`${this.baseUrl}/users/me`, {
+        headers: this.headers,
+        method: 'PATCH',
+        body: JSON.stringify({
+          name,
+          about,
+        })
+      })
+      return this._getResposeData(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+  async updateAvatar({avatar}) {
+    try {
+      const res = await fetch(`${this.baseUrl}/users/me/avatar`, {
+        headers: this.headers,
+        method: 'PATCH',
+        body: JSON.stringify({
+          avatar,
+        })
+      })
+      return this._getResposeData(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+  async postCard({name, link}) {
+    try {
       const res = await fetch(`${this.baseUrl}/cards`, {
         headers: this.headers,
         method: 'POST',
@@ -92,10 +72,7 @@ export class Api {
           link
         })
       })
-      if (res.ok) {
-        return await res.json();
-      }
-      throw new Error(res.status);
+      return this._getResposeData(res)
     } catch (err) {
       console.log(err)
     }
@@ -107,10 +84,7 @@ export class Api {
         headers: this.headers,
         method: 'DELETE',
       });
-      if (res.ok) {
-        return await res.json();
-      }
-      throw new Error(res.status);
+      return this._getResposeData(res)
     } catch (err) {
       console.log(err)
     }
@@ -122,10 +96,7 @@ export class Api {
         headers: this.headers,
         method: 'PUT',
       });
-      if (res.ok) {
-        return await res.json();
-      }
-      throw new Error(res.status);
+      return this._getResposeData(res)
     } catch (err) {
       console.log(err)
     }
@@ -137,16 +108,20 @@ export class Api {
         headers: this.headers,
         method: 'DELETE',
       });
-      if (res.ok) {
-        return await res.json();
-      }
-      throw new Error(res.status);
+      return this._getResposeData(res)
     } catch (err) {
       console.log(err)
     }
   }
 
+  async _getResposeData(res) {
+    if (res.ok) {
+      return await res.json();
+    }
+    throw new Error(res.status);
 }
-// ---------------------------------
+
+}
+
 
 

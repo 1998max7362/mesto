@@ -26,7 +26,7 @@ class Popup {
   _setEventListeners() {
     const closeButton = this._element.querySelector(this._closeButtonSelector)
     this._element.addEventListener('click', evt => {
-      (evt.target === this._element || evt.target === closeButton) ? this.close() : false
+      if (evt.target === this._element || evt.target === closeButton) this.close()
     })
   }
 }

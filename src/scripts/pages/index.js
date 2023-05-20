@@ -96,12 +96,11 @@ const createCard = (cardData, templateSelector, handleCardClick, userId) => {
         try {
           if ((await api.deleteCard(card.getCardId())).message === 'Пост удалён') {
             card._remove()
+            approvePopup.close()
           }
         }
         catch {
           console.log('Не удалось удалить карточку')
-        }finally{
-          approvePopup.close()
         }
       })
     },
@@ -127,6 +126,7 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
     async () => {
       setSubmitButtonLoading(profileValidator)
       try {
+        console.log('profileFormPopup.getInputValues()',profileFormPopup.getInputValues())
         userInfo.setUserInfo(await api.patchUserData(profileFormPopup.getInputValues()))
         profileFormPopup.close()
       }
@@ -165,16 +165,14 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
   editAvatarButton.addEventListener('click', () => avatarFormPopup.open())
 
   // --------------------------CARD
-
   const cardList = new Section(
     {
-      items: initialCards,
       renderer: (item) => {
         cardList.addItem(createCard(item, '#element', handleCardClick, userInfo.getUserId()));
       }
     },
     '.elements')
-  cardList.renderItems()
+  cardList.renderItems(initialCards)
 
   // ------------------------ Card popup
   const placeFormPopup = new PopupWithForm(

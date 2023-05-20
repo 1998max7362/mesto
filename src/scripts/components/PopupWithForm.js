@@ -21,7 +21,8 @@ export class PopupWithForm extends Popup {
   }
 
   getInputValues() {
-    return this.inputList.map(input => input.value)
+    return this.inputList.reduce((obj, input) => ({ ...obj, [input.name]: input.value}), {}) 
+    // return this.inputList.map(input => input.value)
   }
 
   _setEventListeners() {

@@ -1,7 +1,7 @@
 class Card {
   constructor(templateSelector, cardData, handleCardClick, handleAddLike, handleDeleteLike, handleDelete) {
     this._templateSelector = templateSelector
-    this._element = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
+    this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.element__like-button')
     this._likeCounter = this._element.querySelector('.element__like-counter')
     this._removeButton = this._element.querySelector('.element__remove-button')
@@ -90,6 +90,11 @@ class Card {
 
   _remove() {
     this._element.remove()
+    this._element = null
+  }
+
+  _getTemplate() {
+    return document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
   }
 }
 

@@ -187,7 +187,7 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
     async () => {
       setSubmitButtonLoading(placeValidator)
       try {
-        cardList.addItem(createCard(await api.postCard(placeFormPopup.getInputValues()), '#element', handleCardClick));
+        cardList.addItem(createCard(await api.postCard(placeFormPopup.getInputValues()), '#element', handleCardClick, userInfo.getUserId()));
         placeFormPopup.close()
       }
       catch {

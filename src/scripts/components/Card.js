@@ -49,13 +49,14 @@ class Card {
   }
 
   _checkIsUserCreated(userId) {
+    console.log('userId',userId)
     return this._cardData.owner._id === userId ? true : false
   }
 
   _setListeners() {
     this._likeButton.addEventListener('click', () => this._like())
     this._removeButton.addEventListener('click', () => this._handleDelete())
-    this._img.addEventListener('click', () => this._handleCardClick(this._placeName, this._sourceLink))
+    this._img.addEventListener('click', () => this._handleCardClick(this._cardData.name, this._cardData.link))
   }
 
   async _like() {
@@ -83,7 +84,6 @@ class Card {
   }
 
   _showRemoveButton(bool) {
-    console.log('bool', bool)
     if (!bool){
       this._removeButton.classList.add('element__remove-button_disabled')
     }

@@ -78,20 +78,21 @@ export class Api {
   }
 
   async postCard([name, link]) {
-    console.log('post',`${this.baseUrl}/cards`)
-    console.log('name',name)
-    console.log('link',link)
     try {
+      const body = JSON.stringify({
+        name,
+        link
+      })
+      console.log('body',body)
       const res = await fetch(`${this.baseUrl}/cards`, {
         headers: this.headers,
         method: 'POST',
         body: JSON.stringify({
           name,
-          link,
+          link
         })
       })
       if (res.ok) {
-        console.log('res',res)
         return await res.json();
       }
       throw new Error(res.status);

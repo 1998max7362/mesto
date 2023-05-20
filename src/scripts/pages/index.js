@@ -75,7 +75,7 @@ const createCard = (cardData, templateSelector, handleCardClick, userId) => {
     async () => {
       try {
         card.setCardData(await api.likeCard(card.getCardId()))
-        card.checkIsLikedUser(userId)
+        card.checkUsersRelation(userId)
       }
       catch {
         console.log('Не удалось поставить лайк')
@@ -84,7 +84,7 @@ const createCard = (cardData, templateSelector, handleCardClick, userId) => {
     async () => {
       try {
         card.setCardData(await api.dislikeCard(card.getCardId()))
-        card.checkIsLikedUser(userId)
+        card.checkUsersRelation(userId)
       }
       catch {
         console.log('Не удалось убрать лайк')
@@ -93,14 +93,16 @@ const createCard = (cardData, templateSelector, handleCardClick, userId) => {
     // ----удаление не робиТ
     async () => {
       try {
-        console.log(await api.deleteCard(card.getCardId()))
+        if ((await api.deleteCard(card.getCardId())).message === 'Пост удалён'){
+          card._remove()
+        }
       }
       catch {
-        console.log('Не удалось убрать лайк')
+        console.log('Не удалось удалить карточку')
       }
     },
   )
-  card.checkIsLikedUser(userId)
+  card.checkUsersRelation(userId)
   return card.createCardElement()
 }
 
@@ -181,9 +183,7 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
     async () => {
       setSubmitButtonLoading(placeValidator)
       try {
-        res = await api.postCard(placeFormPopup.getInputValues())
-        console.log('res index',res)
-        // cardList.addItem(createCard(await api.postCard(placeFormPopup.getInputValues()), '#element', handleCardClick));
+        cardList.addItem(createCard(await api.postCard(placeFormPopup.getInputValues()), '#element', handleCardClick));
         placeFormPopup.close()
       }
       catch {

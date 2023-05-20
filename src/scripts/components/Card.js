@@ -36,16 +36,25 @@ class Card {
     return this._cardData._id
   }
 
-  checkIsLikedUser(userId) {
+  checkUsersRelation(userId) {
+    this._checkHasUsersLike(userId)
+    this._renderLike()
+    this._showRemoveButton(this._checkIsUserCreated(userId))
+  }
+
+  _checkHasUsersLike(userId) {
     this._cardData.likes.some(user => user._id === userId)
       ? this._isLiked = true
       : this._isLiked = false
-    this._renderLike()
+  }
+
+  _checkIsUserCreated(userId) {
+    return this._cardData.owner._id === userId ? true : false
   }
 
   _setListeners() {
     this._likeButton.addEventListener('click', () => this._like())
-    this._removeButton.addEventListener('click', () => this._remove())
+    this._removeButton.addEventListener('click', () => this._handleDelete())
     this._img.addEventListener('click', () => this._handleCardClick(this._placeName, this._sourceLink))
   }
 
@@ -65,8 +74,6 @@ class Card {
     this._likeCounter.textContent = this._cardData.likes.length
   }
 
-
-
   _renderLike() {
     if (this._isLiked) {
       this._likeButton.classList.add('element__like-button_checked')
@@ -75,9 +82,15 @@ class Card {
     }
   }
 
+  _showRemoveButton(bool) {
+    console.log('bool', bool)
+    if (!bool){
+      this._removeButton.classList.add('element__remove-button_disabled')
+    }
+  }
+
   _remove() {
-    this._handleDelete()
-    // this._element.remove()
+    this._element.remove()
   }
 }
 

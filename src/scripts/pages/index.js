@@ -55,22 +55,45 @@ const setSubmitButtonLoading = (formValidatior) => {
   formValidatior.disableButton()
 }
 
+//-------------------------Approve Popup
+// const approvePopup = new PopupWithForm(
+//   '.popup_type_approve',
+//   'popup_opened',
+//   '.popup__close-button',
+//   componentSelectors,
+//   async () =>{
+//     api.deleteCard()
+//   }
+// )
 
-
-// ----------------------- Cards 
-const createCard = (cardData, templateSelector, handleCardClick) => {
-  const card = new Card(cardData, templateSelector, handleCardClick)
+// ----------------------CARD
+const createCard = (cardData, templateSelector, handleCardClick, userId) => {
+  const card = new Card(
+    templateSelector,
+    userId,
+    cardData,
+    handleCardClick,
+    async () => {
+      try {
+        card.setCardData(await api.likeCard(card.getCardId()))
+      }
+      catch {
+        console.log('Не удалось поставить лайк')
+      }
+    },
+    async () => {
+      try {
+        card.setCardData(await api.dislikeCard(card.getCardId()))
+      }
+      catch {
+        console.log('Не удалось убрать лайк')
+      }
+    },
+    ()=>{},
+  )
   return card.createCardElement()
 }
 
-// const cardList = new Section(
-//   {
-//     items: [],
-//     renderer: (item) => {
-//       cardList.addItem(createCard(item, '#element', handleCardClick));
-//     }
-//   },
-//   '.elements')
 
 
 // -------------------- RENDER PAGE WITH SERVER DATA
@@ -120,38 +143,50 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
         avatarFormPopup.close()
       }
       catch {
-        console.log('Не удалось изменить данные профиля')
+        console.log('Не удалось изменить аватар профиля')
       }
       setSubmitButtonCommon(avatarValidator)
     },
   )
   editAvatarButton.addEventListener('click', () => avatarFormPopup.open())
-}
-)
+
+// --------------------------CARD
+
+  const cardList = new Section(
+    {
+      items: initialCards,
+      renderer: (item) => {
+        cardList.addItem(createCard(item, '#element', handleCardClick, userInfo.getUserId()));
+      }
+    },
+    '.elements')
+    cardList.renderItems()
+})
 
 
 
 
 // ------------------------ Card popup
 
-const placeFormPopup = new PopupWithForm(
-  '.popup_type_card',
-  'popup_opened',
-  '.popup__close-button',
-  componentSelectors,
-  async () => {
-    setSubmitButtonLoading(placeValidator)
-    try {
-      cardList.addItem(createCard(await api.postCard(placeFormPopup.getInputValues()), '#element', handleCardClick));
-      placeFormPopup.close()
-    }
-    catch {
-      console.log('Не удалось загрузить картинку')
-    }
-    setSubmitButtonCommon(placeValidator)
-  },
-  () => {
-    placeValidator.disableButton()
-  })
+// const placeFormPopup = new PopupWithForm(
+//   '.popup_type_card',
+//   'popup_opened',
+//   '.popup__close-button',
+//   componentSelectors,
+//   async () => {
+//     setSubmitButtonLoading(placeValidator)
+//     try {
+//       cardList.addItem(createCard(await api.postCard(placeFormPopup.getInputValues()), '#element', handleCardClick));
+//       placeFormPopup.close()
+//     }
+//     catch {
+//       console.log('Не удалось загрузить картинку')
+//     }
+//     setSubmitButtonCommon(placeValidator)
+//   },
+//   () => {
+//     placeValidator.disableButton()
+//   })
 
-addButton.addEventListener('click', () => placeFormPopup.open())
+// addButton.addEventListener('click', () => placeFormPopup.open())
+

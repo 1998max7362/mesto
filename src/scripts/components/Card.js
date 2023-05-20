@@ -49,7 +49,6 @@ class Card {
   }
 
   _checkIsUserCreated(userId) {
-    console.log('userId',userId)
     return this._cardData.owner._id === userId ? true : false
   }
 

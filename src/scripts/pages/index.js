@@ -114,8 +114,6 @@ const createCard = (cardData, templateSelector, handleCardClick, userId) => {
 
 // -------------------- RENDER PAGE WITH SERVER DATA
 Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
-  console.log('userData', userData)
-  console.log('initialCards', initialCards)
   // ---------Профиль (заполнение данных юзера)
   const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar', userData)
   // ---------Карточки и попап картинки (рендер)

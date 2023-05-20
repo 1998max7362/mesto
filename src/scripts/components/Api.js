@@ -107,7 +107,6 @@ export class Api {
         headers: this.headers,
         method: 'DELETE',
       });
-      console.log('res',res)
       if (res.ok) {
         return await res.json();
       }

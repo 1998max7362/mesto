@@ -56,15 +56,16 @@ const setSubmitButtonLoading = (formValidatior) => {
 }
 
 //-------------------------Approve Popup
-// const approvePopup = new PopupWithForm(
-//   '.popup_type_approve',
-//   'popup_opened',
-//   '.popup__close-button',
-//   componentSelectors,
-//   async () =>{
-//     api.deleteCard()
-//   }
-// )
+const approvePopup = new PopupWithForm(
+  '.popup_type_approve',
+  'popup_opened',
+  '.popup__close-button',
+  componentSelectors,
+  () => { },
+  (handleSubmit) => {
+    approvePopup.handleSubmit = handleSubmit
+  }
+)
 
 // ----------------------CARD
 const createCard = (cardData, templateSelector, handleCardClick, userId) => {
@@ -90,16 +91,19 @@ const createCard = (cardData, templateSelector, handleCardClick, userId) => {
         console.log('Не удалось убрать лайк')
       }
     },
-    // ----удаление не робиТ
-    async () => {
-      try {
-        if ((await api.deleteCard(card.getCardId())).message === 'Пост удалён'){
-          card._remove()
+    () => {
+      approvePopup.open(async () => {
+        try {
+          if ((await api.deleteCard(card.getCardId())).message === 'Пост удалён') {
+            card._remove()
+          }
         }
-      }
-      catch {
-        console.log('Не удалось удалить карточку')
-      }
+        catch {
+          console.log('Не удалось удалить карточку')
+        }finally{
+          approvePopup.close()
+        }
+      })
     },
   )
   card.checkUsersRelation(userId)

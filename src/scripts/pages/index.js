@@ -78,8 +78,8 @@ const createCard = (cardData, templateSelector, handleCardClick, userId) => {
         card.setCardData(await api.likeCard(card.getCardId()))
         card.checkUsersRelation(userId)
       }
-      catch {
-        console.log('Не удалось поставить лайк')
+      catch (err) {
+        console.log(err)
       }
     },
     async () => {
@@ -87,8 +87,8 @@ const createCard = (cardData, templateSelector, handleCardClick, userId) => {
         card.setCardData(await api.dislikeCard(card.getCardId()))
         card.checkUsersRelation(userId)
       }
-      catch {
-        console.log('Не удалось убрать лайк')
+      catch (err) {
+        console.log(err)
       }
     },
     () => {
@@ -99,8 +99,8 @@ const createCard = (cardData, templateSelector, handleCardClick, userId) => {
             approvePopup.close()
           }
         }
-        catch {
-          console.log('Не удалось удалить карточку')
+        catch (err) {
+          console.log(err)
         }
       })
     },
@@ -130,8 +130,8 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
         userInfo.setUserInfo(await api.patchUserData(profileFormPopup.getInputValues()))
         profileFormPopup.close()
       }
-      catch {
-        console.log('Не удалось изменить данные профиля')
+      catch (err) {
+        console.log(err)
       }
       setSubmitButtonCommon(profileValidator)
     },
@@ -156,8 +156,8 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
         userInfo.setUserAvatar(await api.updateAvatar(avatarFormPopup.getInputValues()))
         avatarFormPopup.close()
       }
-      catch {
-        console.log('Не удалось изменить аватар профиля')
+      catch (err) {
+        console.log(err)
       }
       setSubmitButtonCommon(avatarValidator)
     },
@@ -186,8 +186,8 @@ Promise.all([initialCards, userData]).then(([initialCards, userData]) => {
         cardList.addItem(createCard(await api.postCard(placeFormPopup.getInputValues()), '#element', handleCardClick, userInfo.getUserId()));
         placeFormPopup.close()
       }
-      catch {
-        console.log('Не удалось загрузить картинку')
+      catch (err) {
+        console.log(err)
       }
       setSubmitButtonCommon(placeValidator)
     },
